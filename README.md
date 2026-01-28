@@ -1,5 +1,7 @@
 # ramawat.fyi - Personal Blog Site
 
+Author - Udit Ramawat
+
 A personal blog site built with [Astro](https://astro.build) and deployed on [Vercel](https://vercel.com). Designed for minimal friction in writing and sharing thoughts.
 
 ## 🚀 Features
