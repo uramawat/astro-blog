@@ -1,0 +1,33 @@
+---
+import Layout from "../layouts/Layout.astro";
+import { Icon } from "astro-icon/components";
+---
+
+<Layout title="About Me">
+    <h1>About Me</h1>
+    <p>
+        Howdy! I'm a product guy, hiker, dad and a <Icon
+            name="lucide:coffee"
+            class="coffee-icon"
+        /> afficianado.
+    </p>
+    <p>
+        I love clean design, beautiful architecture, craftsmenship and constant
+        learning.
+    </p>
+
+    <div class="contact-section">
+        <a href="mailto:udit.ramawat@gmail.com" class="contact-link">
+            <Icon name="lucide:mail" />
+            <span>Email Me</span>
+        </a>
+        <a
+            href="https://linkedin.com/in/uditramawat"
+            target="_blank"
+            class="contact-link"
+        >
+            <Icon name="lucide:linkedin" />
+            <span>LinkedIn</span>
+        </a>
+    </div>
+</Layout>

@@ -1,0 +1,81 @@
+---
+import Layout from "../layouts/Layout.astro";
+import { getCollection, type CollectionEntry } from "astro:content";
+
+import type { GetStaticPaths, Page } from "astro";
+
+export const getStaticPaths: GetStaticPaths = async ({ paginate }) => {
+	const posts = (await getCollection("blog"))
+		.filter((post) => !post.data.draft)
+		.sort((a, b) => b.data.pubDate.valueOf() - a.data.pubDate.valueOf());
+	return paginate(posts, { pageSize: 5 });
+};
+
+interface Props {
+	page: Page<CollectionEntry<"blog">>;
+}
+
+const { page } = Astro.props;
+---
+
+<Layout title="My Personal Blog">
+	<h1>Hi, I'm Udit!</h1>
+	<p>
+		I'm your friendly neighborhood digital cat herder. I work with awesome
+		teams and deliver products that solve real problems!
+	</p>
+
+	<section style="margin-top: 3rem;">
+		<h2>Recent Posts</h2>
+		<ul style="list-style: none; padding: 0;">
+			{
+				page.data.map((post) => (
+					<li style="margin-bottom: 2rem;">
+						<div style="display: flex; align-items: baseline; justify-content: space-between;">
+							<a
+								href={`/blog/${post.slug}/`}
+								style="font-size: 1.5rem; font-weight: 700; line-height: 1.2;"
+							>
+								{post.data.title}
+							</a>
+							<div style="color: #777; font-size: 0.9rem; white-space: nowrap;">
+								{post.data.pubDate.toLocaleDateString("en-us", {
+									year: "numeric",
+									month: "short",
+									day: "numeric",
+								})}
+							</div>
+						</div>
+						<p style="margin-top: 0.5rem; margin-bottom: 0.5rem;">
+							{post.data.description}
+						</p>
+						{post.data.tags && (
+							<div style="font-size: 0.85rem;">
+								{post.data.tags.map((tag) => (
+									<a
+										href={`/tags/${tag}`}
+										style="margin-right: 0.5rem; color: var(--color-accent);"
+									>
+										#{tag}
+									</a>
+								))}
+							</div>
+						)}
+					</li>
+				))
+			}
+		</ul>
+		<div
+			style="display: flex; justify-content: space-between; margin-top: 2rem;"
+		>
+			{
+				page.url.prev ? (
+					<a href={page.url.prev}>&larr; Previous</a>
+				) : (
+					<div />
+				)
+			}
+			{page.url.next ? <a href={page.url.next}>Next &rarr;</a> : <div />}
+		</div>
+	</section>
+</Layout>
