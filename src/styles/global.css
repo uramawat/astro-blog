@@ -316,3 +316,14 @@ html:not(.dark) .moon-icon {
 	color: #777;
 	font-size: 0.9rem;
 }
+
+/* Post Titles */
+.post-title {
+	color: var(--color-text);
+	text-decoration: none;
+	transition: color 0.2s ease;
+}
+
+.post-title:hover {
+	color: var(--color-accent);
+}
