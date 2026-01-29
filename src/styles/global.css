@@ -96,26 +96,93 @@ footer {
 
 /* Timeline */
 .timeline {
-	padding-left: 1.5rem;
-	border-left: 2px solid var(--color-border);
+	position: relative;
+	max-width: 100%;
+	margin: 0 auto;
+}
+
+/* The vertical line */
+.timeline::after {
+	content: '';
+	position: absolute;
+	width: 2px;
+	background-color: var(--color-border);
+	top: 0;
+	bottom: 0;
+	left: 30%;
+	/* Shifted from 50% to 30% */
+	margin-left: -1px;
 }
 
 .timeline-item {
-	margin-bottom: 2rem;
+	padding: 10px 40px;
 	position: relative;
+	background-color: inherit;
+	box-sizing: border-box;
 }
 
-.timeline-item::before {
+/* The circle markers */
+.timeline-item::after {
 	content: '';
 	position: absolute;
-	left: -1.95rem;
-	/* Adjust based on padding/border */
-	top: 0.4rem;
-	width: 0.8rem;
-	height: 0.8rem;
-	background: var(--color-bg);
-	border: 2px solid var(--color-accent);
+	width: 16px;
+	height: 16px;
+	right: -8px;
+	background-color: var(--color-bg);
+	border: 3px solid #ff9f55;
+	/* Default Orange/Personal */
+	top: 15px;
 	border-radius: 50%;
+	z-index: 1;
+}
+
+/* Personal items on the left */
+.timeline-item.personal {
+	left: 0;
+	width: 30%;
+	/* Narrower column */
+	text-align: right;
+}
+
+/* Career items on the right */
+.timeline-item.career {
+	left: 30%;
+	/* Starts at the line */
+	width: 70%;
+	/* Wider column */
+}
+
+/* Fix marker position for right side */
+.timeline-item.career::after {
+	left: -8px;
+	border-color: var(--color-accent);
+	/* Blue */
+}
+
+/* Mobile Responsive */
+@media screen and (max-width: 600px) {
+
+	/* Place the timelime to the left */
+	.timeline::after {
+		left: 31px;
+	}
+
+	.timeline-item {
+		width: 100%;
+		padding-left: 70px;
+		padding-right: 25px;
+	}
+
+	.timeline-item::after {
+		left: 22px;
+	}
+
+	/* Make sure all items align left on mobile */
+	.timeline-item.personal,
+	.timeline-item.career {
+		left: 0;
+		text-align: left;
+	}
 }
 
 .timeline-date {
@@ -152,7 +219,7 @@ footer {
 }
 
 /* About Page Icons & Contact */
-.coffee-icon {
+.lucide-icon {
 	display: inline-block;
 	vertical-align: middle;
 	width: 1.2em;

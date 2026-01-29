@@ -1,83 +1,103 @@
 ---
 import Layout from "../layouts/Layout.astro";
+import { Icon } from "astro-icon/components";
 ---
 
 <Layout title="Timeline">
     <h1>Timeline</h1>
-    <p style="margin-bottom: 2rem;">A brief history of my career in tech.</p>
+    <p style="margin-bottom: 2rem;">
+        A brief snapshot of where I've been and things I've done
+    </p>
 
     <div class="timeline">
-        <div class="timeline-item">
+        <div class="timeline-item career">
             <div class="timeline-date">Jul'25 - Present</div>
             <h3>Archer Aviation</h3>
             <p>
                 <div class="timeline-role">
-                    <p class="role-title">Staff Product Manager</p>
-                    <p>Focused on a few different areas at Archer</p>
-                    <ul>
-                        <li>
-                            Data Platform for Flight Test Analysis and Insights
-                        </li>
-                        <li>
-                            Product SW Strategy for Consumer and Enterprise SW
-                        </li>
-                        <li>
-                            Product Intelligence features targeted towards Urban
-                            Air Mobility
-                        </li>
-                    </ul>
+                    <p>
+                        Working on the future of Urban Air Mobility. Solving
+                        hard problems.
+                    </p>
                 </div>
             </p>
         </div>
-        <div class="timeline-item">
+        <div class="timeline-item personal">
+            <div class="timeline-date">Jan '25</div>
+            <h3>Became a Dad</h3>
+            <p>The greatest role I've taken on.</p>
+        </div>
+        <div class="timeline-item career">
             <div class="timeline-date">Nov'19 - Jul'25</div>
             <h3>Apple Inc.</h3>
 
             <div class="timeline-role">
-                <p class="role-title">Staff Product Manager</p>
-                <ul>
-                    <li>Future visionOS platforms</li>
-                </ul>
-            </div>
-
-            <div class="timeline-role">
-                <p class="role-title">Senior Product Manager</p>
                 <ul>
                     <li>
-                        Siri On-Device Architecture for Next Generation
-                        Platforms leveraging on-device and cloud based language
-                        models.
+                        Bunch of cool things that I can't talk about <Icon
+                            name="lucide:lock"
+                            class="lucide-icon"
+                        />
                     </li>
+                    <li>Wore many different hats for Vision Pro Launch</li>
                     <li>
-                        visionOS 1.0 launch - Software Updates, core platform,
-                        system performance
-                    </li>
-                    <li>
-                        Mac M1 transition - Mac Studio Launch, Magic Keyboard
-                        with touchID
+                        Shipped my first consumer product - Airpods Max,
+                        followed by a lot of audio and mac products. But the
+                        first launch was special
                     </li>
                 </ul>
             </div>
         </div>
-        <div class="timeline-item">
+        <div class="timeline-item personal">
+            <div class="timeline-date">Oct'23</div>
+            <h3>Married my Best Friend</h3>
+            <p>The best partnership of my life.</p>
+        </div>
+        <div class="timeline-item career">
             <div class="timeline-date">Mar'16 - Nov'19</div>
             <h3>Intel Corp.</h3>
-            <p>
-                Product Manager for Intel Information Security working on
-                Encryption and Classification Products
-            </p>
+            <div class="timeline-role">
+                <ul>
+                    <li>
+                        Delivered Encryption at Scale for all of Intel's IP.
+                    </li>
+                    <li>
+                        Fell in love with th outdoors. Thank you Grand Canyon :)
+                    </li>
+                </ul>
+            </div>
         </div>
-        <div class="timeline-item">
+        <div class="timeline-item career">
             <div class="timeline-date">Nov'15 - Mar'16</div>
             <h3>Apttus (acquired by Conga)</h3>
-            <p>Salesforce Analyst</p>
+            <p>Learned a lot about Salesforce in a very small time</p>
         </div>
-        <div class="timeline-item">
+        <div class="timeline-item personal">
+            <div class="timeline-date">Jun '15</div>
+            <h3>Grad School & Donuts</h3>
+            <p>
+                Finished Grad School and found religion with Stan's <Icon
+                    name="lucide:donut"
+                    class="lucide-icon"
+                /> Shop!
+            </p>
+        </div>
+        <div class="timeline-item career">
             <div class="timeline-date">Sep'13 - Jun'15</div>
             <h3>Santa Clara University</h3>
             <p>Master of Science in Computer Science & Engineering.</p>
         </div>
-        <div class="timeline-item">
+        <div class="timeline-item personal">
+            <div class="timeline-date">May '13</div>
+            <h3>Pizza & Friends</h3>
+            <p>
+                Made lifelong friends, fell in love with deep-dish <Icon
+                    name="lucide:pizza"
+                    class="lucide-icon"
+                />!
+            </p>
+        </div>
+        <div class="timeline-item career">
             <div class="timeline-date">Aug'09 - May'13</div>
             <h3>Illinois Institute of Technology</h3>
             <p>Bachelor of Science in Computer Science.</p>
