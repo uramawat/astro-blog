@@ -24,4 +24,14 @@ With the [recent](https://github.com/moltbot/moltbot) [storeis](https://www.ther
 
 Using Antigravity + Gemini 3 has truly been really impactful for my personal workflows. After a few targeted prompts, I had a MVP up and running in no time.
 
-* Details of the package on [Github](https://github.com/uramawat/helpfulGremlin) README
+
+* `main.py`
+ -- (The Conductor): The CLI entry point built with Typer and Rich. It orchestrates the entire process—spinning up a process pool to scan files in parallel, displaying a real-time progress bar, and rendering the final report table with remediation advice.
+
+* `scanner.py`
+ -- (The Navigator): Responsible for efficiently traversing the file system. It handles the gritty work of parsing 
+
+* `detector.py`
+ --(The Brain): The core detection engine. It loads regex signatures (specified in the `patterns.yaml` file) and implements a Shannon entropy algorithm to flag high-randomness strings (like generic passwords) that don't match known patterns.
+
+Details of the package on [Github](https://github.com/uramawat/helpfulGremlin) README
