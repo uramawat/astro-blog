@@ -24,6 +24,8 @@ With the [recent](https://github.com/moltbot/moltbot) [storeis](https://www.ther
 
 Using Antigravity + Gemini 3 has truly been really impactful for my personal workflows. After a few targeted prompts, I had a MVP up and running in no time.
 
+> I would be remiss if I dind't shout out to Claude, which I use very religiously at work. It's fun to evaluate different agentic solutions to see how they're both unique.
+
 
 * `main.py`
  -- (The Conductor): The CLI entry point built with Typer and Rich. It orchestrates the entire process—spinning up a process pool to scan files in parallel, displaying a real-time progress bar, and rendering the final report table with remediation advice.
