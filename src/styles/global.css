@@ -327,3 +327,10 @@ html:not(.dark) .moon-icon {
 .post-title:hover {
 	color: var(--color-accent);
 }
+
+/* Blog Post Inline Icons */
+.prose [data-icon] {
+	display: inline-block;
+	vertical-align: -0.15em;
+	font-size: 1.1em;
+}

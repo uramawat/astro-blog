@@ -2,7 +2,7 @@
 title: 'Ideation to Launch at Warpspeed'
 description: 'Trying to vibe safely before you git push'
 pubDate: 'Jan 29 2026'
-tags: ['experimenting']
+tags: ['experimenting','tools','ai']
 ---
 
 This title doesn't really stand out if you're in tech. In this _all gas, no brakes_ phase, it's very easy to not being cognizant of if things are falling through the cracks.
