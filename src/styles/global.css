@@ -173,7 +173,9 @@ footer {
 		padding-right: 25px;
 	}
 
-	.timeline-item::after {
+	.timeline-item::after,
+	.timeline-item.career::after,
+	.timeline-item.personal::after {
 		left: 22px;
 	}
 
@@ -182,6 +184,12 @@ footer {
 	.timeline-item.career {
 		left: 0;
 		text-align: left;
+		width: 100%;
+	}
+
+	.contact-section {
+		flex-direction: column;
+		gap: 1rem;
 	}
 }
 
