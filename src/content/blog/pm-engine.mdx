@@ -1,0 +1,45 @@
+---
+title: 'Building a PM for your AI - how meta'
+description: 'Gemini CLI needs some love in the deluge of Claude workflows'
+pubDate: 'Mar 27 2026'
+tags: ['tools', 'ai', 'experimenting']
+---
+import { Icon } from 'astro-icon/components';
+
+As someone who loves automating things and appreciates structured thinking, when there's a clear problem and an opportunity, I know it's too good to pass. 
+
+I've been using Claude Code and Gemini App heavily at work and its been truly incredible to have such capable agents at my disposal. I would be remiss if I didn't shout out to the open-source community for some amazing plugins and the patterns they champion:
+
+*   **Persona-driven friction:** Heavily inspired by Garry Tan’s [gstack](https://github.com/garrytan/gstack/tree/main). AI agents shouldn’t just be blind coders. They should emulate senior technical roles that actively push back.
+*   **File-based memory:** Inspired by [get-shit-done](https://github.com/gsd-build/get-shit-done). Architectural context and phase logic must be explicitly tracked in rigid Markdown files (PRD and STATE) to serve as the ultimate source of truth.
+
+These patterns have been immensely helpful as I've been building PoC to production-ready apps, but I felt there was a gap within the Gemini ecosystem. 
+
+That's why I built [PM-Engine](https://github.com/uramawat/pm-engine). I wanted to bring the same friction and discipline I value in real-world product teams to my AI workflow.
+
+#### Focusing on the why
+
+Instead of just telling the AI to "build X," PM-Engine forces you through a structured discovery phase. Take a look at this `/discover` session for a quick macro tracking app I was playing with:
+
+![Lead PM Interrogation](/pm-engine-discover.png)
+
+The Lead PM persona doesn't write a single line of code. Instead, it hits you with "brutal" questions: *Who is this for? What is the one quantifiable pain point? What are we NOT building?*
+
+This friction is a feature, not a bug. By the time you get through these questions, you have a `PRD.md` that actually means something. It's the difference between a project that drifts into a mess of hallucinations and one that has a clear finish line.
+
+#### The Dual-Brain System
+
+The core of PM-Engine is simple: separate the **Intent** from the **Execution**.
+
+*   **The Product Engine (`PRD.md`)**: The persistent memory of what we are building. It’s the boundary against scope creep.
+*   **The Execution Engine (`STATE.md`)**: A rigid state tracker that preserves context over long sessions.
+
+When you run `/plan`, a Staff Engineer takes the PRD and breaks it into a checklist. When you `/execute`, the agent is locked into only the active phase. It's physically unable to hallucinate future features because it doesn't "see" them yet.
+
+#### Moving with Intention
+
+Ultimately, I just wanted to build a framework that can be broadly consumed by anyone using Gemini-cli. I've been using it for everything from scaffolding fast Astro sites to heavier backend work with inference layers, etc. (more on that coming soon), and it's been the first time working with an agent where I felt in control of the architectural drift.
+
+Available on [<Icon name="tabler:brand-npm" />](https://www.npmjs.com/package/pm-engine) and [<Icon name="tabler:brand-python" />](https://pypi.org/project/pm-engine/) now. GitHub repo with all the details on how to get started: [<Icon name="tabler:brand-github" />](https://github.com/uramawat/pm-engine)
+
+This might be the most PM thing of all time I've done. Giving my AI its own bespoke PM. <Icon name="tabler:robot" />
