@@ -33,7 +33,7 @@ const { page } = Astro.props;
 					<li style="margin-bottom: 2rem;">
 						<div style="display: flex; align-items: baseline; justify-content: space-between;">
 							<a
-								href={`/blog/${post.slug}/`}
+								href={`/blog/${post.id}/`}
 								class="post-title"
 								style="font-size: 1.5rem; font-weight: 700; line-height: 1.2;"
 							>
@@ -52,7 +52,7 @@ const { page } = Astro.props;
 						</p>
 						{post.data.tags && (
 							<div style="font-size: 0.85rem;">
-								{post.data.tags.map((tag) => (
+								{post.data.tags.map((tag: string) => (
 									<a
 										href={`/tags/${tag}`}
 										style="margin-right: 0.5rem; color: var(--color-accent);"

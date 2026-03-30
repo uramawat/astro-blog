@@ -36,7 +36,7 @@ const { posts } = Astro.props;
         {
             posts.map((post) => (
                 <li>
-                    <a href={`/blog/${post.slug}/`} class="post-title">
+                    <a href={`/blog/${post.id}/`} class="post-title">
                         {post.data.title}
                     </a>
                     <span class="date">

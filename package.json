@@ -9,15 +9,20 @@
     "astro": "astro"
   },
   "dependencies": {
-    "@astrojs/check": "^0.9.6",
-    "@astrojs/mdx": "^4.3.13",
-    "@astrojs/vercel": "^9.0.4",
+    "@astrojs/check": "^0.9.8",
+    "@astrojs/mdx": "^5.0.3",
+    "@astrojs/vercel": "^10.0.3",
     "@iconify-json/lucide": "^1.2.87",
     "@iconify-json/mdi": "^1.2.3",
     "@iconify-json/simple-icons": "^1.2.70",
     "@iconify-json/tabler": "^1.2.26",
-    "astro": "^5.18.0",
+    "@vercel/analytics": "^2.0.1",
+    "astro": "^6.1.2",
     "astro-icon": "^1.1.5",
     "typescript": "^5.9.3"
+  },
+  "overrides": {
+    "path-to-regexp": "6.3.0",
+    "yaml": "2.8.3"
   }
 }
