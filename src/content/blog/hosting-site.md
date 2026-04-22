@@ -2,6 +2,7 @@
 title: 'Rabbithole of wanting to switch'
 description: 'Different Hosting environments and evolving tech'
 pubDate: 'Jan 28 2026'
+showDescription: true
 tags: ['infrastructure']
 ---
 

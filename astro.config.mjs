@@ -10,5 +10,12 @@ import mdx from '@astrojs/mdx';
 
 export default defineConfig({
     adapter: vercel({}),
-    integrations: [icon(), mdx()]
+    integrations: [icon(), mdx()],
+    markdown: {
+        syntaxHighlight: {
+            type: 'shiki',
+            // Do not highlight Mermaid diagrams
+            excludeLangs: ['mermaid'],
+        },
+    },
 });

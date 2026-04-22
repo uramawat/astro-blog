@@ -2,6 +2,7 @@
 title: 'Ideation to Launch at Warpspeed'
 description: 'Trying to vibe safely before you git push'
 pubDate: 'Jan 29 2026'
+showDescription: true
 tags: ['experimenting','tools','ai']
 ---
 

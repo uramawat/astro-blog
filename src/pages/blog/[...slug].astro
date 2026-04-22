@@ -35,6 +35,13 @@ const { Content } = await render(post);
                 }
             </div>
             {
+                post.data.showDescription && post.data.description && (
+                    <p style="margin-top: 1rem; font-size: 1.2rem; color: #ccc;">
+                        {post.data.description}
+                    </p>
+                )
+            }
+            {
                 post.data.heroImage && (
                     <img
                         width={720}
@@ -50,4 +57,42 @@ const { Content } = await render(post);
             <Content />
         </div>
     </article>
+    <script is:inline type="module">
+        import mermaid from 'https://cdn.jsdelivr.net/npm/mermaid@11/dist/mermaid.esm.min.mjs';
+        
+        mermaid.initialize({ startOnLoad: false, theme: 'dark' });
+
+        const renderMermaid = async () => {
+            const blocks = document.querySelectorAll('pre code.language-mermaid');
+            
+            for (const block of blocks) {
+                // Skip if already processed
+                if (block.hasAttribute('data-mermaid')) continue;
+                block.setAttribute('data-mermaid', 'true');
+                
+                const text = block.textContent;
+                const div = document.createElement('div');
+                div.className = 'mermaid';
+                div.style.display = 'flex';
+                div.style.justifyContent = 'center';
+                div.style.margin = '2rem 0';
+                div.textContent = text;
+                
+                // Replace the <pre> tag with our new div
+                block.parentElement.replaceWith(div);
+            }
+            
+            try {
+                await mermaid.run({ querySelector: '.mermaid' });
+            } catch (err) {
+                console.error("Mermaid error:", err);
+            }
+        };
+
+        if (document.readyState === 'loading') {
+            document.addEventListener('DOMContentLoaded', renderMermaid);
+        } else {
+            renderMermaid();
+        }
+    </script>
 </Layout>
