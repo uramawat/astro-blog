@@ -11,6 +11,7 @@
   "dependencies": {
     "@astrojs/check": "^0.9.8",
     "@astrojs/mdx": "^5.0.3",
+    "@astrojs/sitemap": "^3.7.2",
     "@astrojs/vercel": "^10.0.3",
     "@iconify-json/lucide": "^1.2.87",
     "@iconify-json/mdi": "^1.2.3",
