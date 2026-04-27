@@ -2,6 +2,12 @@
 title: 'Ideation to Launch at Warpspeed'
 description: 'Trying to vibe safely before you git push'
 pubDate: 'Jan 29 2026'
+isProject: true
+projectTitle: 'HelpfulGremlin'
+projectDescription: 'A CLI tool to scan for secrets and sensitive data before you push to production, built with Typer and Rich.'
+githubLink: 'https://github.com/uramawat/helpfulGremlin'
+liveLink: 'https://pypi.org/project/helpfulgremlin/'
+thumbnail: 'https://images.unsplash.com/photo-1555066931-4365d14bab8c?q=80&w=1200&h=675&auto=format&fit=crop'
 showDescription: true
 tags: ['experimenting','tools','ai']
 ---

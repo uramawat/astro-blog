@@ -1,13 +1,18 @@
 ---
-
+const { pathname } = Astro.url;
+const subpath = pathname.match(/[^\/]+/g);
+const isActive = (path: string) => path === pathname || (path !== "/" && path === "/" + subpath?.[0]);
+const isBlogActive = pathname === "/" || pathname.startsWith("/blog/") || (subpath?.[0] === "2"); // Handle pagination and posts
 ---
 
 <header>
     <nav>
         <a href="/" class="site-title">UR</a>
         <div class="nav-links">
-            <a href="/about">About</a>
-            <a href="/timeline">Timeline</a>
+            <a href="/" class:list={[{ active: isBlogActive }]}>Blog</a>
+            <a href="/about" class:list={[{ active: isActive("/about") }]}>About</a>
+            <a href="/projects" class:list={[{ active: isActive("/projects") }]}>Projects</a>
+            <a href="/timeline" class:list={[{ active: isActive("/timeline") }]}>Timeline</a>
             <button id="theme-toggle" aria-label="Toggle theme">
                 <svg
                     class="sun-icon"

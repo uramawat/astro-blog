@@ -1,0 +1,213 @@
+---
+import Layout from "../layouts/Layout.astro";
+import { getCollection } from "astro:content";
+import { Icon } from "astro-icon/components";
+
+const projects = (await getCollection("blog"))
+	.filter(
+		(post) =>
+			!post.data.draft &&
+			post.data.isProject &&
+			post.data.projectTitle &&
+			post.data.projectDescription
+	)
+	.sort((a, b) => b.data.pubDate.valueOf() - a.data.pubDate.valueOf());
+---
+
+<Layout title="Projects | Udit Ramawat">
+	<h1>Projects</h1>
+	<p>
+		A collection of projects I've worked on, ranging from side projects to
+		professional work that I can share.
+	</p>
+
+	<div class="projects-grid">
+		{
+			projects.map((project) => (
+				<div class="project-card">
+					{project.data.thumbnail ? (
+						<img
+							src={project.data.thumbnail}
+							alt={project.data.projectTitle || project.data.title}
+							class="project-thumbnail"
+						/>
+					) : (
+						<div class="project-thumbnail-placeholder" />
+					)}
+					<div class="project-content">
+						<h2 class="project-title">
+							{project.data.projectTitle || project.data.title}
+						</h2>
+						<p class="project-description">
+							{project.data.projectDescription ||
+								project.data.description}
+						</p>
+
+						<div class="project-links">
+							<!-- Debug: {project.data.projectTitle} - hideBlogLink: {String(project.data.hideBlogLink)} -->
+							{project.data.hideBlogLink !== true && (
+								<a
+									href={`/blog/${project.id}/`}
+									class="icon-btn"
+									title="Read Post"
+									aria-label="Read Post"
+								>
+									<Icon name="tabler:book" />
+								</a>
+							)}
+							{project.data.githubLink && (
+								<a
+									href={project.data.githubLink}
+									target="_blank"
+									rel="noopener noreferrer"
+									class="icon-btn"
+									title="GitHub"
+									aria-label="GitHub Repository"
+								>
+									<Icon name="tabler:brand-github" />
+								</a>
+							)}
+							{project.data.liveLink && (
+								<a
+									href={project.data.liveLink}
+									target="_blank"
+									rel="noopener noreferrer"
+									class="icon-btn"
+									title="Live Demo"
+									aria-label="Live Demo"
+								>
+									<Icon name="tabler:external-link" />
+								</a>
+							)}
+							{project.data.webLink && (
+								<a
+									href={project.data.webLink}
+									target="_blank"
+									rel="noopener noreferrer"
+									class="icon-btn"
+									title="Website"
+									aria-label="Visit Website"
+								>
+									<Icon name="tabler:world" />
+								</a>
+							)}
+						</div>
+					</div>
+				</div>
+			))
+		}
+	</div>
+
+	{
+		projects.length === 0 && (
+			<p style="margin-top: 2rem;">
+				No projects found. Add <code>isProject: true</code> to a blog
+				post to see it here!
+			</p>
+		)
+	}
+</Layout>
+
+<style>
+	.projects-grid {
+		display: grid;
+		grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+		gap: 2rem;
+		margin-top: 3rem;
+	}
+
+	.project-card {
+		border: 1px solid var(--color-border);
+		border-radius: 12px;
+		overflow: hidden;
+		display: flex;
+		flex-direction: column;
+		background-color: var(--color-bg);
+		transition:
+			transform 0.2s ease,
+			box-shadow 0.2s ease;
+	}
+
+	.project-card:hover {
+		transform: translateY(-4px);
+		box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
+	}
+
+	.project-thumbnail {
+		width: 100%;
+		aspect-ratio: 16 / 9;
+		object-fit: cover;
+		border-bottom: 1px solid var(--color-border);
+	}
+
+	.project-thumbnail-placeholder {
+		width: 100%;
+		aspect-ratio: 16 / 9;
+		background: linear-gradient(
+			135deg,
+			var(--color-border) 0%,
+			var(--color-bg) 100%
+		);
+		border-bottom: 1px solid var(--color-border);
+	}
+
+	.project-content {
+		padding: 1.5rem;
+		flex-grow: 1;
+		display: flex;
+		flex-direction: column;
+	}
+
+	.project-title {
+		font-size: 1.4rem;
+		font-weight: 700;
+		margin-bottom: 0.75rem;
+		margin-top: 0;
+		color: var(--color-text);
+		line-height: 1.2;
+	}
+
+	.project-description {
+		font-size: 1rem;
+		color: #777;
+		margin-bottom: 1.5rem;
+		margin-top: 0;
+		flex-grow: 1;
+	}
+
+	.project-links {
+		display: flex;
+		gap: 1rem;
+		margin-top: auto;
+	}
+
+	.icon-btn {
+		display: inline-flex;
+		align-items: center;
+		justify-content: center;
+		width: 40px;
+		height: 40px;
+		border-radius: 8px;
+		border: 1px solid var(--color-border);
+		color: var(--color-text);
+		transition: all 0.2s ease;
+		background-color: transparent;
+	}
+
+	.icon-btn :global(svg) {
+		width: 20px;
+		height: 20px;
+	}
+
+	.icon-btn:hover {
+		background-color: var(--color-border);
+		transform: translateY(-2px);
+		color: var(--color-accent);
+	}
+
+	@media (max-width: 640px) {
+		.projects-grid {
+			grid-template-columns: 1fr;
+		}
+	}
+</style>
