@@ -56,34 +56,6 @@ a:hover {
 	color: var(--color-accent);
 }
 
-/* Header */
-header {
-	margin-bottom: 3rem;
-	padding-bottom: 1rem;
-	border-bottom: 1px solid var(--color-border);
-}
-
-nav {
-	display: flex;
-	justify-content: space-between;
-	align-items: center;
-}
-
-nav a {
-	color: var(--color-text);
-	margin-left: 1.5rem;
-	font-weight: 500;
-}
-
-.site-title {
-	margin-left: 0;
-	font-weight: 700;
-	font-size: 1.2rem;
-}
-
-nav a.active {
-}
-
 /* Footer */
 footer {
 	margin-top: 4rem;
