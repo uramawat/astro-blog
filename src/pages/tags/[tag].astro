@@ -4,7 +4,7 @@ import { getCollection } from "astro:content";
 
 export async function getStaticPaths() {
     const allPosts = (await getCollection("blog")).filter(
-        (post) => !post.data.draft,
+        (post) => !post.data.draft && !post.data.hideBlogLink,
     );
     const uniqueTags = [
         ...new Set(
