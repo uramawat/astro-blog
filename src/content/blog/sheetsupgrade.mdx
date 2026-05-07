@@ -1,0 +1,40 @@
+---
+title: "When tracking with Google Sheets doesn't cut it"
+description: "Purpose Built Nanny Ledger to track mileage, days off etc."
+pubDate: '2026-05-02'
+isProject: true
+hideBlogLink: false
+projectTitle: 'Family Nanny Ledger'
+projectDescription: 'Tracking mileage reimbursement, days off with a clean UX (Inspired by Google Brand guidelines)'
+showDescription: true
+thumbnail: '/thumbnails/applogin.jpg'
+tags: ['tools', 'experimenting']
+githubLink: 'https://github.com/uramawat/nanny-tracking-app'
+liveLink: 'https://reluctanthiker.com'
+---
+import { Icon } from 'astro-icon/components';
+
+My wife and I are very fortunate to have a wonderful caregiver for our son who dotes on him, plays with him, takes him to libraries, parks, etc. - and just keeps him engaged all day long. 
+
+All these trips mean driving around the bay area for her, which means we need a mechanism to track those miles for reimbursement. Enter trusty old Google Sheets - a couple of simple macros later, a simple sheet was up and we were on our way. Initially, this worked fine. But as the number of days entered in the sheet grew, the unwieldy nature of Google Sheets on mobile really came to the fore. Perhaps a separate sidebar for a different day on my feelings on that topic (I know Sheets can be so much better on mobile, but it's not at the moment).
+
+#### The AHA moment
+
+In parallel, the other tracking challenge was to ensure we could accurately account for time off based on hours outside of regularly scheduled vacation days for our Nanny. This is so that we could do accurate accounting and bookkeeping with the payroll service. Now trying to update information on this payroll website (HomePay) feels akin to swimming in quicksand. So once again, trusty old Google sheets came to the rescue initially, and once again very soon ran into similar usage limitations.
+
+#### Stand aside Google Sheets
+
+I thought I could probably build something quick, responsive, which eliminates the friction for data entry and makes the key tracking insights dead simple and prominently visible. And for sheer cheek, I asked Gemini <Icon name="tabler:sparkles" /> to use Google themed branding for general look/feel. 
+
+Key details that made this work for us:
+* Globally configured mileage reimbursement rate, number of holidays, number of sick days
+* Adding the agreed upon vacation days to see a holistic calendar view
+* Logic to handle round trips and reconciliation for paid v/s unpaid miles
+
+Overall results have worked out pretty well and my wife, the nanny and I are finding very good use out of this. I mean what else would I do when I have an un-used domain lying around.
+
+![Main Dashboard Pills](/thumbnails/dashboard.jpg) 
+
+<img src="/thumbnails/log.jpg" width="200px"/>
+
+All code and tech stack breakdown on [<Icon name="mdi:github" />](https://github.com/uramawat/nanny-tracking-app)
