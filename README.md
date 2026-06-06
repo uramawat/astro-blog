@@ -1,52 +1,78 @@
-# ramawat.fyi - Personal Blog Site
+# ramawat.fyi
 
-Author - Udit Ramawat
+The source for [ramawat.fyi](https://ramawat.fyi), Udit Ramawat's personal
+website and blog.
 
-A personal blog site built with [Astro](https://astro.build) and deployed on [Vercel](https://vercel.com). Designed for minimal friction in writing and sharing thoughts.
+It is built with [Astro](https://astro.build), supports Markdown and MDX posts,
+and is deployed on [Vercel](https://vercel.com).
 
-## 🚀 Features
+## What is here
 
-### Core Functionality
-- **Drafts System**: Post frontmatter supports `draft: true` to hide content from production builds while keeping it in the repo.
-- **Timeline View**: A dedicated `/timeline` page to showcase professional history and milestones.
-- **Tagging**: Group posts by topics with auto-generated tag pages (e.g., `/tags/infrastructure`).
+- A paginated blog with tag pages
+- Project posts collected on a dedicated `/projects` page
+- A professional and personal timeline
+- Draft posts that stay out of the published site
+- Light and dark themes
+- Generated sitemap and Vercel Analytics
 
-### Design & Tech Stack
-- **Framework**: Astro (Static Site Generation)
-- **Styling**: Vanilla CSS, consolidated globally for consistency.
-- **Typography**: Uses the **Liter** font (Google Fonts) for a modern, clean reading experience.
-- **Theming**: Dark/Light mode support with auto-detection.
-- **Favicon**: Custom "UR" SVG icon.
+## Local development
 
-## 🛠️ Development
+The project uses Node.js 22 in CI.
 
-### Project Structure
+```sh
+npm install
+npm run dev
+```
+
+The development server runs at [localhost:4321](http://localhost:4321).
+
+| Command | Purpose |
+| --- | --- |
+| `npm run dev` | Start the local development server |
+| `npm run check` | Type-check and validate the Astro project |
+| `npm run build` | Build the site into `dist/` |
+| `npm run preview` | Preview the production build locally |
+
+## Writing
+
+Posts live in `src/content/blog` as Markdown or MDX files. Their frontmatter is
+validated by the schema in `src/content.config.ts`.
+
+A basic post looks like this:
+
+```yaml
+---
+title: Post title
+description: A short summary of the post.
+pubDate: 2026-06-06
+tags:
+  - example
+draft: true
+---
+```
+
+Set `draft: true` to keep a post out of the published blog. Set
+`isProject: true` and add the relevant project metadata to include a post on
+the projects page.
+
+## Project structure
+
 ```text
 /
-├── public/           # Static assets (favicons, images)
+├── public/               # Static assets
 ├── src/
-│   ├── components/   # UI components (Header, Footer)
-│   ├── content/      # Markdown blog posts
-│   ├── layouts/      # Page wrappers
-│   ├── pages/        # Route definitions
-│   └── styles/       # Global CSS
+│   ├── components/       # Shared UI components
+│   ├── content/blog/     # Markdown and MDX posts
+│   ├── layouts/          # Page layouts
+│   ├── pages/            # File-based routes
+│   └── styles/           # Global styles
+├── astro.config.mjs
 └── package.json
 ```
 
-### Commands
+## Validation and deployment
 
-All commands are run from the root of the project:
+Pull requests and pushes to `main` run Astro checks, a production build, and a
+production dependency audit through GitHub Actions.
 
-| Command | Action |
-| :--- | :--- |
-| `npm install` | Installs dependencies |
-| `npm run dev` | Starts local dev server at `localhost:4321` |
-| `npm run build` | Build your production site to `./dist/` |
-
-## 📦 Deployment
-
-This site is configured for zero-config deployment on **Vercel**.
-
-1.  Push changes to the `main` branch on GitHub.
-2.  Vercel automatically triggers a build (`npm run build`).
-3.  The site is deployed to `ramawat.fyi` (managed via Porkbun DNS).
+Vercel deploys the site from the `main` branch.
