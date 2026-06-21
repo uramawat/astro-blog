@@ -5,7 +5,8 @@
   "scripts": {
     "dev": "astro dev",
     "check": "astro check",
-    "build": "astro build",
+    "build": "astro build && node scripts/add-rss-content.mjs && pagefind --site dist && pagefind --site .vercel/output/static",
+    "build:dev-search": "npm run build && node scripts/sync-pagefind-dev.mjs",
     "preview": "astro preview",
     "astro": "astro"
   },
@@ -26,5 +27,8 @@
   "overrides": {
     "path-to-regexp": "6.3.0",
     "yaml": "2.8.3"
+  },
+  "devDependencies": {
+    "pagefind": "^1.5.2"
   }
 }
