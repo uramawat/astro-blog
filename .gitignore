@@ -1,6 +1,7 @@
 # build output
 dist/
 .vercel/
+public/pagefind/
 # generated types
 .astro/
 

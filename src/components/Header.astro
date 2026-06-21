@@ -1,190 +1,433 @@
 ---
+import { Icon } from "astro-icon/components";
+
 const { pathname } = Astro.url;
 const subpath = pathname.match(/[^\/]+/g);
-const isActive = (path: string) => path === pathname || (path !== "/" && path === "/" + subpath?.[0]);
-const isBlogActive = pathname === "/" || pathname.startsWith("/blog/") || (subpath?.[0] === "2");
+const isActive = (path: string) =>
+	path === pathname || (path !== "/" && path === "/" + subpath?.[0]);
+const isBlogActive =
+	pathname === "/" || pathname.startsWith("/blog/") || subpath?.[0] === "2";
 ---
 
-<header>
-    <nav>
-        <a href="/" class="site-title">UR</a>
-        
-        <div class="nav-links" id="nav-links">
-            <a href="/" class:list={[{ active: isBlogActive }]}>Blog</a>
-            <a href="/about" class:list={[{ active: isActive("/about") }]}>About</a>
-            <a href="/projects" class:list={[{ active: isActive("/projects") }]}>Projects</a>
-            <a href="/timeline" class:list={[{ active: isActive("/timeline") }]}>Timeline</a>
-        </div>
+<header data-pagefind-ignore="all">
+	<nav>
+		<a href="/" class="site-title">UR</a>
 
-        <div class="nav-icons">
-            <button id="theme-toggle" aria-label="Toggle theme">
-                <svg class="sun-icon" xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="5"></circle><line x1="12" y1="1" x2="12" y2="3"></line><line x1="12" y1="21" x2="12" y2="23"></line><line x1="4.22" y1="4.22" x2="5.64" y2="5.64"></line><line x1="18.36" y1="18.36" x2="19.78" y2="19.78"></line><line x1="1" y1="12" x2="3" y2="12"></line><line x1="21" y1="12" x2="23" y2="12"></line><line x1="4.22" y1="19.78" x2="5.64" y2="18.36"></line><line x1="18.36" y1="5.64" x2="19.78" y2="4.22"></line></svg>
-                <svg class="moon-icon" xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path></svg>
-            </button>
-            <button id="menu-toggle" aria-label="Toggle menu" aria-expanded="false">
-                <svg class="hamburger-icon" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="3" y1="12" x2="21" y2="12"></line><line x1="3" y1="6" x2="21" y2="6"></line><line x1="3" y1="18" x2="21" y2="18"></line></svg>
-                <svg class="close-icon" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="18" y1="6" x2="6" y2="18"></line><line x1="6" y1="6" x2="18" y2="18"></line></svg>
-            </button>
-        </div>
-    </nav>
+		<div class="nav-links" id="nav-links">
+			<a href="/" class:list={[{ active: isBlogActive }]}>Blog</a>
+			<a href="/about" class:list={[{ active: isActive("/about") }]}>About</a>
+			<a href="/projects" class:list={[{ active: isActive("/projects") }]}>Projects</a>
+			<a href="/timeline" class:list={[{ active: isActive("/timeline") }]}>Timeline</a>
+		</div>
+
+		<div class="nav-icons">
+			<button
+				id="search-toggle"
+				aria-label="Search"
+				aria-expanded="false"
+				aria-controls="search-popover"
+			>
+				<Icon name="tabler:search" class="search-icon" />
+			</button>
+			<button id="theme-toggle" aria-label="Toggle theme">
+				<Icon name="tabler:sun" class="sun-icon" />
+				<Icon name="tabler:moon" class="moon-icon" />
+			</button>
+			<button id="menu-toggle" aria-label="Toggle menu" aria-expanded="false">
+				<Icon name="tabler:menu-2" class="hamburger-icon" />
+				<Icon name="tabler:x" class="close-icon" />
+			</button>
+		</div>
+	</nav>
+	<div id="search-popover" class="search-popover" hidden>
+		<div id="pagefind-search" class="pagefind-search"></div>
+	</div>
 </header>
+<div
+	id="search-overlay"
+	class="search-overlay"
+	data-pagefind-ignore="all"
+	hidden
+></div>
 
 <style>
-    header {
-        margin-bottom: 3rem;
-        padding-bottom: 1rem;
-        border-bottom: 1px solid var(--color-border);
-        position: relative;
-    }
+	header {
+		margin-bottom: 3rem;
+		padding-bottom: 1rem;
+		border-bottom: 1px solid var(--color-border);
+		position: relative;
+	}
 
-    nav {
-        display: flex;
-        align-items: center;
-        width: 100%;
-    }
+	nav {
+		display: flex;
+		align-items: center;
+		width: 100%;
+	}
 
-    .site-title {
-        font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
-        font-weight: 700;
-        font-size: 1.5rem;
-        color: var(--color-text);
-        text-decoration: none;
-        flex-shrink: 0;
-    }
+	.site-title {
+		font-family:
+			system-ui,
+			-apple-system,
+			BlinkMacSystemFont,
+			"Segoe UI",
+			Roboto,
+			sans-serif;
+		font-weight: 700;
+		font-size: 1.5rem;
+		color: var(--color-text);
+		text-decoration: none;
+		flex-shrink: 0;
+	}
 
-    .nav-links {
-        display: flex;
-        gap: 1.5rem;
-        align-items: center;
-        margin-left: auto;
-    }
+	.nav-links {
+		display: flex;
+		gap: 1.5rem;
+		align-items: center;
+		margin-left: auto;
+	}
 
-    .nav-links a {
-        font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
-        color: var(--color-text);
-        font-weight: 500;
-        font-size: 1rem;
-        text-decoration: none;
-        transition: color 0.2s ease;
-        white-space: nowrap;
-    }
+	.nav-links a {
+		font-family:
+			system-ui,
+			-apple-system,
+			BlinkMacSystemFont,
+			"Segoe UI",
+			Roboto,
+			sans-serif;
+		color: var(--color-text);
+		font-weight: 500;
+		font-size: 1rem;
+		text-decoration: none;
+		transition: color 0.2s ease;
+		white-space: nowrap;
+	}
 
-    .nav-links a:hover {
-        color: var(--color-accent);
-    }
+	.nav-links a:hover {
+		color: var(--color-accent);
+	}
 
-    /* No active highlight as requested */
-    .nav-links a.active {
-        color: var(--color-text);
-    }
+	.nav-links a.active {
+		color: var(--color-text);
+	}
 
-    .nav-icons {
-        display: flex;
-        align-items: center;
-        gap: 0.75rem;
-        margin-left: 1.5rem;
-        flex-shrink: 0;
-    }
+	.nav-icons {
+		display: flex;
+		align-items: center;
+		gap: 0.75rem;
+		margin-left: 1.5rem;
+		flex-shrink: 0;
+	}
 
-    #theme-toggle, #menu-toggle {
-        background: none;
-        border: none;
-        cursor: pointer;
-        color: var(--color-text);
-        padding: 4px;
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        transition: color 0.2s ease;
-    }
+	#search-toggle,
+	#theme-toggle,
+	#menu-toggle {
+		background: none;
+		border: none;
+		cursor: pointer;
+		color: var(--color-text);
+		padding: 4px;
+		display: flex;
+		align-items: center;
+		justify-content: center;
+		transition: color 0.2s ease;
+	}
 
-    #theme-toggle:hover, #menu-toggle:hover {
-        color: var(--color-accent);
-    }
+	#search-toggle:hover,
+	#theme-toggle:hover,
+	#menu-toggle:hover {
+		color: var(--color-accent);
+	}
 
-    #menu-toggle {
-        display: none;
-    }
+	.nav-icons :global(svg) {
+		width: 1.25rem;
+		height: 1.25rem;
+	}
 
-    .close-icon {
-        display: none;
-    }
+	.search-popover {
+		position: fixed;
+		top: 18vh;
+		left: 50%;
+		transform: translateX(-50%);
+		z-index: 200;
+		box-sizing: border-box;
+		width: min(38rem, calc(100vw - 2rem));
+		max-height: min(66vh, 34rem);
+		overflow: auto;
+		padding: 1rem;
+		border-radius: 8px;
+		background: var(--color-bg);
+		box-shadow: 0 24px 64px rgba(0, 0, 0, 0.34);
+	}
 
-    @media (max-width: 600px) {
-        .nav-links {
-            display: none;
-            position: absolute;
-            top: 100%;
-            left: -1rem;
-            right: -1rem;
-            background-color: var(--color-bg);
-            flex-direction: column;
-            padding: 1.5rem;
-            gap: 1.25rem;
-            border-bottom: 1px solid var(--color-border);
-            z-index: 100;
-            margin-left: 0;
-            box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1);
-        }
+	.search-overlay {
+		position: fixed;
+		inset: 0;
+		z-index: 190;
+		background: rgba(0, 0, 0, 0.48);
+		backdrop-filter: blur(2px);
+	}
 
-        .nav-links.open {
-            display: flex;
-        }
+	:global(html.light) .search-overlay {
+		background: rgba(255, 255, 255, 0.68);
+	}
 
-        .nav-icons {
-            margin-left: auto;
-        }
+	.pagefind-search {
+		--pagefind-ui-primary: var(--color-accent);
+		--pagefind-ui-text: var(--color-text);
+		--pagefind-ui-background: var(--color-bg);
+		--pagefind-ui-border: var(--color-border);
+		--pagefind-ui-border-width: 1px;
+		--pagefind-ui-border-radius: 8px;
+		--pagefind-ui-font: var(--font-body);
+	}
 
-        #menu-toggle {
-            display: flex;
-        }
+	.pagefind-search :global(.pagefind-ui__search-input) {
+		color: var(--color-text) !important;
+		caret-color: var(--color-accent) !important;
+		border-color: transparent !important;
+		border-width: 0 !important;
+		box-shadow: none !important;
+		outline: none !important;
+		font-weight: 400 !important;
+		-webkit-text-fill-color: var(--color-text) !important;
+	}
 
-        #menu-toggle[aria-expanded="true"] .hamburger-icon {
-            display: none;
-        }
+	.pagefind-search :global(.pagefind-ui__search-input:focus) {
+		border-color: transparent !important;
+		box-shadow: none !important;
+		outline: none !important;
+	}
 
-        #menu-toggle[aria-expanded="true"] .close-icon {
-            display: block;
-        }
-    }
+	.pagefind-search :global(.pagefind-ui__search-input::placeholder) {
+		color: #777;
+		opacity: 0.65;
+		-webkit-text-fill-color: #777;
+	}
+
+	.pagefind-search :global(.pagefind-ui__search-clear) {
+		color: var(--color-text) !important;
+		border: 0 !important;
+		box-shadow: none !important;
+		outline: none !important;
+		font-weight: 400 !important;
+	}
+
+	.pagefind-search :global(.pagefind-ui__search-clear:focus) {
+		box-shadow: none !important;
+		outline: none !important;
+	}
+
+	.pagefind-search :global(.pagefind-ui__message),
+	.pagefind-search :global(.pagefind-ui__result-title),
+	.pagefind-search :global(.pagefind-ui__result-link),
+	.pagefind-search :global(.pagefind-ui__button) {
+		font-weight: 500 !important;
+	}
+
+	.pagefind-search :global(mark) {
+		background: #facc15;
+		color: #111;
+	}
+
+	#menu-toggle {
+		display: none;
+	}
+
+	.close-icon {
+		display: none;
+	}
+
+	@media (max-width: 600px) {
+		.nav-links {
+			display: none;
+			position: absolute;
+			top: 100%;
+			left: -1rem;
+			right: -1rem;
+			background-color: var(--color-bg);
+			flex-direction: column;
+			padding: 1.5rem;
+			gap: 1.25rem;
+			border-bottom: 1px solid var(--color-border);
+			z-index: 100;
+			margin-left: 0;
+			box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1);
+		}
+
+		.search-popover {
+			top: 5.5rem;
+			width: calc(100vw - 2rem);
+			max-height: calc(100vh - 7rem);
+		}
+
+		.nav-links.open {
+			display: flex;
+		}
+
+		.nav-icons {
+			margin-left: auto;
+		}
+
+		#menu-toggle {
+			display: flex;
+		}
+
+		#menu-toggle[aria-expanded="true"] .hamburger-icon {
+			display: none;
+		}
+
+		#menu-toggle[aria-expanded="true"] .close-icon {
+			display: block;
+		}
+	}
 </style>
 
 <script is:inline>
-    // Theme logic
-    const theme = (() => {
-        if (typeof localStorage !== "undefined" && localStorage.getItem("theme")) {
-            return localStorage.getItem("theme");
-        }
-        if (window.matchMedia("(prefers-color-scheme: light)").matches) {
-            return "light";
-        }
-        return "dark";
-    })();
+	// Theme logic
+	const theme = (() => {
+		if (
+			typeof localStorage !== "undefined" &&
+			localStorage.getItem("theme")
+		) {
+			return localStorage.getItem("theme");
+		}
+		if (window.matchMedia("(prefers-color-scheme: light)").matches) {
+			return "light";
+		}
+		return "dark";
+	})();
 
-    if (theme === "light") {
-        document.documentElement.classList.add("light");
-    } else {
-        document.documentElement.classList.remove("light");
-    }
+	if (theme === "light") {
+		document.documentElement.classList.add("light");
+	} else {
+		document.documentElement.classList.remove("light");
+	}
 
-    window.localStorage.setItem("theme", theme);
+	window.localStorage.setItem("theme", theme);
 
-    const handleToggleClick = () => {
-        const element = document.documentElement;
-        element.classList.toggle("light");
-        const isLight = element.classList.contains("light");
-        localStorage.setItem("theme", isLight ? "light" : "dark");
-    };
+	const handleToggleClick = () => {
+		const element = document.documentElement;
+		element.classList.toggle("light");
+		const isLight = element.classList.contains("light");
+		localStorage.setItem("theme", isLight ? "light" : "dark");
+	};
 
-    document.getElementById("theme-toggle")?.addEventListener("click", handleToggleClick);
+	document
+		.getElementById("theme-toggle")
+		?.addEventListener("click", handleToggleClick);
 
-    // Mobile menu logic
-    const menuToggle = document.getElementById("menu-toggle");
-    const navLinks = document.getElementById("nav-links");
+	// Mobile menu logic
+	const menuToggle = document.getElementById("menu-toggle");
+	const navLinks = document.getElementById("nav-links");
 
-    menuToggle?.addEventListener("click", () => {
-        const isExpanded = menuToggle.getAttribute("aria-expanded") === "true";
-        menuToggle.setAttribute("aria-expanded", !isExpanded);
-        navLinks?.classList.toggle("open");
-    });
+	const closeMenu = () => {
+		menuToggle?.setAttribute("aria-expanded", "false");
+		navLinks?.classList.remove("open");
+	};
+
+	menuToggle?.addEventListener("click", () => {
+		const isExpanded = menuToggle.getAttribute("aria-expanded") === "true";
+		menuToggle.setAttribute("aria-expanded", String(!isExpanded));
+		navLinks?.classList.toggle("open");
+		closeSearch();
+	});
+
+	// Pagefind search logic
+	const searchToggle = document.getElementById("search-toggle");
+	const searchPopover = document.getElementById("search-popover");
+	const searchOverlay = document.getElementById("search-overlay");
+	const searchContainer = document.getElementById("pagefind-search");
+	let pagefindReady = false;
+
+	const loadPagefind = () =>
+		new Promise((resolve, reject) => {
+			if (window.PagefindUI) {
+				resolve();
+				return;
+			}
+
+			if (!document.querySelector('link[href="/pagefind/pagefind-ui.css"]')) {
+				const stylesheet = document.createElement("link");
+				stylesheet.rel = "stylesheet";
+				stylesheet.href = "/pagefind/pagefind-ui.css";
+				document.head.append(stylesheet);
+			}
+
+			const existingScript = document.querySelector(
+				'script[src="/pagefind/pagefind-ui.js"]'
+			);
+
+			if (existingScript) {
+				existingScript.addEventListener("load", resolve, { once: true });
+				existingScript.addEventListener("error", reject, { once: true });
+				return;
+			}
+
+			const script = document.createElement("script");
+			script.src = "/pagefind/pagefind-ui.js";
+			script.onload = resolve;
+			script.onerror = reject;
+			document.head.append(script);
+		});
+
+	const initPagefind = async () => {
+		if (pagefindReady || !searchContainer) return;
+
+		try {
+			await loadPagefind();
+			new window.PagefindUI({
+				element: "#pagefind-search",
+				showImages: false,
+				showSubResults: true,
+				resetStyles: false,
+				autofocus: true,
+				translations: {
+					placeholder: "Search posts and projects...",
+					zero_results: "No results for [SEARCH_TERM]",
+				},
+			});
+			pagefindReady = true;
+		} catch {
+			searchContainer.innerHTML =
+				'<p style="margin: 0; color: #777;">Search is available after running the production build.</p>';
+		}
+	};
+
+	function closeSearch() {
+		searchPopover?.setAttribute("hidden", "");
+		searchOverlay?.setAttribute("hidden", "");
+		searchToggle?.setAttribute("aria-expanded", "false");
+	}
+
+	const openSearch = async () => {
+		closeMenu();
+		searchOverlay?.removeAttribute("hidden");
+		searchPopover?.removeAttribute("hidden");
+		searchToggle?.setAttribute("aria-expanded", "true");
+		await initPagefind();
+		const input = searchPopover?.querySelector("input");
+		window.requestAnimationFrame(() => input?.focus());
+	};
+
+	searchToggle?.addEventListener("click", async () => {
+		const isExpanded = searchToggle.getAttribute("aria-expanded") === "true";
+		if (isExpanded) {
+			closeSearch();
+		} else {
+			await openSearch();
+		}
+	});
+
+	document.addEventListener("keydown", (event) => {
+		if (event.key === "Escape") closeSearch();
+	});
+
+	searchOverlay?.addEventListener("click", closeSearch);
+
+	document.addEventListener("click", (event) => {
+		const target = event.target;
+		if (!(target instanceof Node)) return;
+		if (searchPopover?.contains(target) || searchToggle?.contains(target)) return;
+		closeSearch();
+	});
 </script>
