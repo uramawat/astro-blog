@@ -249,12 +249,84 @@ footer {
 	transform: translateY(-2px);
 }
 
+/* Now Page */
+.now-hero {
+	margin-bottom: 3rem;
+}
+
+.eyebrow {
+	margin: 0 0 0.75rem;
+	color: #777;
+	font-size: 0.9rem;
+	font-weight: 600;
+	text-transform: uppercase;
+	letter-spacing: 0.08em;
+}
+
+.now-hero h1 {
+	margin-top: 0;
+	margin-bottom: 1rem;
+}
+
+.lede {
+	margin: 0;
+	font-size: 1.25rem;
+	line-height: 1.55;
+	color: var(--color-text);
+	opacity: 0.9;
+}
+
+.now-section {
+	padding: 1.5rem 0;
+	border-top: 1px solid var(--color-border);
+}
+
+.section-heading {
+	display: flex;
+	align-items: center;
+	gap: 0.75rem;
+	margin-bottom: 0.75rem;
+}
+
+.section-heading svg {
+	width: 1.25rem;
+	height: 1.25rem;
+	color: var(--color-accent);
+	flex: 0 0 auto;
+}
+
+.section-heading h2 {
+	margin: 0;
+	font-size: 1.4rem;
+}
+
+.now-section p {
+	margin: 0;
+}
+
+.now-list {
+	margin: 0;
+	padding-left: 1.25rem;
+}
+
+.now-list li {
+	margin-bottom: 0.7rem;
+}
+
+.now-list li:last-child {
+	margin-bottom: 0;
+}
+
 @media screen and (max-width: 600px) {
 	.about-profile-image {
 		float: none;
 		display: block;
 		width: min(72vw, 260px);
 		margin: 0.5rem auto 1.5rem;
+	}
+
+	.lede {
+		font-size: 1.1rem;
 	}
 }
 

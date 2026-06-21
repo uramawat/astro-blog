@@ -1,0 +1,73 @@
+---
+import Layout from "../layouts/Layout.astro";
+import { Icon } from "astro-icon/components";
+
+const updatedAt = "June 2026";
+---
+
+<Layout
+	title="Now | Udit Ramawat"
+	description="A current snapshot of what Udit Ramawat is focused on, learning, building, and paying attention to."
+>
+	<section class="now-hero">
+		<p class="eyebrow">Updated {updatedAt}</p>
+		<h1>Now</h1>
+		<p class="lede">
+			A small public snapshot of what has my attention right now.
+		</p>
+	</section>
+
+	<section class="now-section">
+		<div class="section-heading">
+			<Icon name="lucide:compass" aria-hidden="true" />
+			<h2>Focused On</h2>
+		</div>
+		<ul class="now-list">
+			<li>
+				Moving to Codex from AntiGravity.
+			</li>
+			<li>
+				Keeping a high signal-to-noise ratio in what I read, write, and ship.
+			</li>
+		</ul>
+	</section>
+
+	<section class="now-section">
+		<div class="section-heading">
+			<Icon name="lucide:hammer" aria-hidden="true" />
+			<h2>Building</h2>
+		</div>
+		<ul class="now-list">
+			<li>
+				Blog Improvements - for example: search, RSS.
+			</li>
+			<li>
+				I can’t disclose most of what I’m working on, but I’m driving a lot of DevX improvements and concepts around synthesizing different types of insights.
+			</li>
+		</ul>
+	</section>
+
+	<section class="now-section">
+		<div class="section-heading">
+			<Icon name="lucide:book-open" aria-hidden="true" />
+			<h2>Learning</h2>
+		</div>
+		<ul class="now-list">
+			<li>More ASL practice.</li>
+			<li>How to activate my core more often than I currently do.</li>
+		</ul>
+	</section>
+
+	<section class="now-section">
+		<div class="section-heading">
+			<Icon name="lucide:mountain" aria-hidden="true" />
+			<h2>Making Room For</h2>
+		</div>
+		<ul class="now-list">
+			<li>Family bike rides.</li>
+			<li>Coffee with Carly.</li>
+			<li>Brunches with friends.</li>
+			<li>Formula 1 weekends, especially when Ferrari gives me reasons to hope.</li>
+		</ul>
+	</section>
+</Layout>
