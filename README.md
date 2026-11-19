@@ -99,3 +99,7 @@ Pull requests and pushes to `main` run Astro checks, a production build, and a
 production dependency audit through GitHub Actions.
 
 Vercel deploys the site from the `main` branch.
+
+The "Container image" workflow builds and tests the Docker image for each pull
+request. For each push to `main`, it also publishes the image to
+`ghcr.io/uramawat/astro-blog` with the tags `latest` and `sha-<commit>`.
