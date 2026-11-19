@@ -36,3 +36,16 @@ updates:
           - "*"
     commit-message:
       prefix: ci
+
+  # Base images in the Dockerfile: node and nginx-unprivileged.
+  - package-ecosystem: docker
+    directory: /
+    schedule:
+      interval: weekly
+      day: monday
+    groups:
+      docker-images:
+        patterns:
+          - "*"
+    commit-message:
+      prefix: docker
