@@ -1,0 +1,21 @@
+# The image build installs dependencies and builds the site.
+# Do not send local copies of these files to Docker.
+node_modules
+dist
+.astro
+.vercel
+public/pagefind
+
+# Files that the image does not need.
+.git
+.github
+.claude
+.vscode
+.idea
+docs
+Dockerfile
+.dockerignore
+*.log
+.DS_Store
+.env
+.env.*

@@ -33,6 +33,29 @@ The development server runs at [localhost:4321](http://localhost:4321).
 | `npm run build` | Build the site into `dist/` |
 | `npm run preview` | Preview the production build locally |
 
+## Run with Docker
+
+The `Dockerfile` builds the site and serves it with nginx. You can run the
+image on any host that runs containers.
+
+1. Build the image:
+
+   ```sh
+   docker build -t blog-site .
+   ```
+
+2. Start the container:
+
+   ```sh
+   docker run --rm -p 8080:8080 blog-site
+   ```
+
+3. Open [localhost:8080](http://localhost:8080).
+
+The container listens on port 8080. To use a different port, set the `PORT`
+environment variable, for example `docker run -e PORT=3000 -p 3000:3000 blog-site`.
+The nginx configuration is in `docker/nginx/`.
+
 ## Writing
 
 Posts live in `src/content/blog` as Markdown or MDX files. Their frontmatter is
