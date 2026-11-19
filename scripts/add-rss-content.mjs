@@ -1,7 +1,7 @@
 import { readFile, writeFile } from "node:fs/promises";
 import { join } from "node:path";
 
-const outputRoots = ["dist", ".vercel/output/static"];
+const outputRoots = ["dist"];
 const cdata = (value) => value.replaceAll("]]>", "]]]]><![CDATA[>");
 
 const absolutizeUrls = (html, siteUrl) =>

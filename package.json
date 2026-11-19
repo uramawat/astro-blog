@@ -5,7 +5,7 @@
   "scripts": {
     "dev": "astro dev",
     "check": "astro check",
-    "build": "astro build && node scripts/add-rss-content.mjs && pagefind --site dist && pagefind --site .vercel/output/static",
+    "build": "astro build && node scripts/add-rss-content.mjs && pagefind --site dist",
     "build:dev-search": "npm run build && node scripts/sync-pagefind-dev.mjs",
     "preview": "astro preview",
     "astro": "astro"
@@ -14,7 +14,6 @@
     "@astrojs/check": "^0.9.8",
     "@astrojs/mdx": "^7.0.5",
     "@astrojs/sitemap": "^3.7.2",
-    "@astrojs/vercel": "^11.0.5",
     "@iconify-json/lucide": "^1.2.87",
     "@iconify-json/mdi": "^1.2.3",
     "@iconify-json/simple-icons": "^1.2.70",
@@ -25,7 +24,6 @@
     "typescript": "^5.9.3"
   },
   "overrides": {
-    "path-to-regexp": "6.3.0",
     "yaml": "2.8.3"
   },
   "devDependencies": {
