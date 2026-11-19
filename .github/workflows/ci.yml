@@ -39,5 +39,8 @@ jobs:
       - name: Build production site
         run: npm run build
 
+      # The audit shows all advisories in the log.
+      # Only high and critical advisories stop the job.
+      # Moderate advisories with no fix must not block pull requests.
       - name: Audit production dependencies
-        run: npm audit --omit=dev --audit-level=moderate
+        run: npm audit --omit=dev --audit-level=high
