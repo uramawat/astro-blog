@@ -1,0 +1,94 @@
+name: Container image
+
+# Pull requests: build the image and test it. Do not publish it.
+# Push to main: build, test and publish the image to GitHub Container Registry.
+on:
+  pull_request:
+  push:
+    branches:
+      - main
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+concurrency:
+  group: container-${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: true
+
+env:
+  IMAGE: ghcr.io/${{ github.repository }}
+
+jobs:
+  image:
+    name: Docker build
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    permissions:
+      contents: read
+      packages: write
+
+    steps:
+      - name: Check out repository
+        uses: actions/checkout@v4
+
+      - name: Set up Docker Buildx
+        uses: docker/setup-buildx-action@v3
+
+      - name: Build image
+        uses: docker/build-push-action@v6
+        with:
+          context: .
+          load: true
+          tags: blog-site:ci
+          cache-from: type=gha
+          cache-to: type=gha,mode=max
+
+      # Start the container and make sure that it serves the site.
+      - name: Test image
+        run: |
+          docker run -d --name blog -p 8080:8080 blog-site:ci
+          for attempt in $(seq 1 15); do
+            curl -fs -o /dev/null http://127.0.0.1:8080/ && break
+            sleep 1
+          done
+          curl -fsS -o /dev/null http://127.0.0.1:8080/
+          curl -fsS -o /dev/null http://127.0.0.1:8080/rss.xml
+          curl -fsS -o /dev/null http://127.0.0.1:8080/pagefind/pagefind.js
+          curl -fsSI http://127.0.0.1:8080/resume.pdf | grep -qi '^content-disposition: attachment'
+          missing_page_code=$(curl -s -o /dev/null -w '%{http_code}' http://127.0.0.1:8080/does-not-exist)
+          test "$missing_page_code" = "404"
+          echo "The container serves the site."
+
+      - name: Show container logs
+        if: always()
+        run: docker logs blog || true
+
+      - name: Log in to GitHub Container Registry
+        if: github.event_name != 'pull_request'
+        uses: docker/login-action@v3
+        with:
+          registry: ghcr.io
+          username: ${{ github.actor }}
+          password: ${{ secrets.GITHUB_TOKEN }}
+
+      - name: Make image tags
+        if: github.event_name != 'pull_request'
+        id: meta
+        uses: docker/metadata-action@v5
+        with:
+          images: ${{ env.IMAGE }}
+          tags: |
+            type=sha,prefix=sha-
+            type=raw,value=latest,enable={{is_default_branch}}
+
+      # The build cache from the "Build image" step makes this step fast.
+      - name: Publish image
+        if: github.event_name != 'pull_request'
+        uses: docker/build-push-action@v6
+        with:
+          context: .
+          push: true
+          tags: ${{ steps.meta.outputs.tags }}
+          labels: ${{ steps.meta.outputs.labels }}
+          cache-from: type=gha
