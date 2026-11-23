@@ -12,13 +12,13 @@
   },
   "dependencies": {
     "@astrojs/mdx": "^7.0.5",
-    "@astrojs/sitemap": "^3.7.5",
-    "@iconify-json/lucide": "^1.2.155",
+    "@astrojs/sitemap": "^3.7.6",
+    "@iconify-json/lucide": "^1.2.157",
     "@iconify-json/mdi": "^1.2.3",
-    "@iconify-json/simple-icons": "^1.2.102",
+    "@iconify-json/simple-icons": "^1.2.103",
     "@iconify-json/tabler": "^1.2.46",
     "@vercel/analytics": "^2.0.1",
-    "astro": "^7.4.12",
+    "astro": "^7.4.13",
     "astro-icon": "^1.1.5"
   },
   "overrides": {
